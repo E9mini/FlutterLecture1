@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter_application_1/FlutterExample/introductionWidget.dart';
+import 'package:provider/provider.dart';
 
-class wordListView extends StatefulWidget {
+class wordListView extends StatefulWidget with ChangeNotifier {
   wordListView({super.key});
 
   int maxCounter = 50;
-  int counter = 3;
+  int counter = 30;
 /*
 1. :현재 개수 label, + 버튼, - 버튼
 2. :ListView WordCart
 */
+
+  void change(int val) {
+    print("change is call $val");
+    counter += val;
+    notifyListeners();
+  }
+
   @override
   State<wordListView> createState() => _wordListViewState();
 }
 
 class _wordListViewState extends State<wordListView> {
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +36,6 @@ class _wordListViewState extends State<wordListView> {
         child: Column(
           children: [
             Expanded(
-              flex: 1,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: WordCountDisplay(widget.counter),
@@ -41,22 +46,16 @@ class _wordListViewState extends State<wordListView> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: ShoppingList(<Product>[
-                  Product("Eggs"),
-                  Product("Flour"),
-                  Product("Chocolate chips"),
-                  Product("Flour"),
-                  Product("Apple"),
-                  Product("Eggs"),
-                  Product("Flour"),
-                  Product("Chocolate chips"),
-                  Product("Flour"),
-                  Product("Apple"),
+                  for (num i = 0; i < widget.counter; i++)
+                    Product(WordPair.random().asPascalCase),
                 ]),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: WordCounter(),
+            ChangeNotifierProvider(
+              create: (context) => wordListView(),
+              child: Expanded(
+                child: WordCounter(),
+              ),
             ),
           ],
         ),
@@ -102,13 +101,15 @@ class WordCounter extends StatefulWidget {
 
 class _WordCounterState extends State<WordCounter> {
   int _counter = 0;
-  int _maxCounter = 50;
+  int _maxCounter = 0;
 
   void _increment() {
     if (_counter < _maxCounter) {
       setState(() {
         _counter++;
+        context.read<wordListView>().change(1);
         print(_counter);
+        print(context.read<wordListView>().counter);
       });
     }
   }

@@ -94,6 +94,8 @@ class _ShoppingListState extends State<ShoppingList> {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
+      // physics: const NeverScrollableScrollPhysics(),
+      physics:ScrollPhysics(),
       itemCount: widget.products.length,
       itemBuilder: (BuildContext context, int index) {
         // widget.products.map((Product product) {
