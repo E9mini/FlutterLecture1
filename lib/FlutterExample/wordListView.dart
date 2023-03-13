@@ -7,7 +7,7 @@ class wordListView extends StatefulWidget with ChangeNotifier {
   wordListView({super.key});
 
   int maxCounter = 50;
-  int counter = 30;
+  int counter = 10;
 /*
 1. :현재 개수 label, + 버튼, - 버튼
 2. :ListView WordCart
@@ -18,6 +18,7 @@ class wordListView extends StatefulWidget with ChangeNotifier {
     counter += val;
     notifyListeners();
   }
+
 
   @override
   State<wordListView> createState() => _wordListViewState();
@@ -87,14 +88,14 @@ class WordCountDisplay extends StatelessWidget {
   WordCountDisplay(this.count);
 
   final int count;
-  int item = 1;
   @override
   Widget build(BuildContext context) {
-    return Text("Word : $item");
+    return Text("Word : $count");
   }
 }
 
 class WordCounter extends StatefulWidget {
+  
   @override
   State<WordCounter> createState() => _WordCounterState();
 }

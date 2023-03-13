@@ -7,7 +7,7 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 import 'FlutterExample/introductionWidget.dart';
 import 'FlutterExample/wordListView.dart';
-
+import 'FlutterExample/tutorialLayout.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
