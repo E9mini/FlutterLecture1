@@ -8,6 +8,8 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'FlutterExample/introductionWidget.dart';
 import 'FlutterExample/wordListView.dart';
 import 'FlutterExample/tutorialLayout.dart';
+import 'FlutterExample/tutorialAnimation.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -17,8 +19,7 @@ class MyApp extends StatelessWidget {
       title: "ListView",
       theme: ThemeData(primarySwatch: Colors.red),
       // home: ListViewExample(),
-      home: wordListView(),
+      home: LogoApp(),
     );
   }
 }
-
